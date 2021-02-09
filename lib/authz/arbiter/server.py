@@ -105,6 +105,10 @@ async def handle(request):
     try:
         authN_token_header = request.headers['Authorization']
         authZ_token_header = request.headers['X-CanDIG-Authz']
+        # PoC
+        dac_header = request.headers['X-CANDIG-DAC-REMS']
+        print(f"Found DAC Header ? : {dac_header}")
+        #
     except Exception as e:
         print(e)
         return web.HTTPInternalServerError(body=json.dumps({'error': 'Authorization Error'}))
@@ -122,7 +126,6 @@ async def handle(request):
 
 
     print(f"Path: {request.path}")
-
 
 
     if mode=="debug":

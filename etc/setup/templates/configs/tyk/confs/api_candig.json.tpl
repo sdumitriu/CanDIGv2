@@ -59,8 +59,13 @@
 	        "path": "/opt/tyk-gateway/middleware/authMiddleware.js",
 	        "require_session": false
 	    }
-        ],
+    ],
 	"post": [
+        {
+	        "name": "remsMiddleware",
+	        "path": "/opt/tyk-gateway/middleware/remsMiddleware.js",
+	        "require_session": false
+	    },
         {
 	        "name": "permissionsStoreMiddleware",
 	        "path": "/opt/tyk-gateway/middleware/permissionsStoreMiddleware.js",

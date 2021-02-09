@@ -96,7 +96,16 @@ permissionsStoreMiddleware.NewProcessRequest(function(request, session, spec) {
             request.ReturnOverrides.ResponseError = "Vault Error"
         }
     }
-    
+
+    // REMS Header is actually set as "X-CANDIG-DAC-REMS" but is interpreted in PascalCase within Tyk
+    if (request.Headers["X-Candig-Dac-Rems"] != undefined) {
+        log("Received X-Candig-Dac-Rems as " + request.Headers["X-Candig-Dac-Rems"])
+    }
+    else {
+        log("No X-Candig-Dac-Rems found..")
+        log("Headers found : " + JSON.stringify(request.Headers))
+        log("SetHeaders found : " + JSON.stringify(request.SetHeaders))
+    }
     // MUST return both the request and session
     return permissionsStoreMiddleware.ReturnData(request, session.meta_data);
 });

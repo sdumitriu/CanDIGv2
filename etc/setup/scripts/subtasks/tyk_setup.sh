@@ -32,6 +32,9 @@ envsubst < ${PWD}/etc/setup/templates/configs/tyk/confs/tyk.conf.tpl > ${PWD}/li
 echo "Working on authMiddleware.js .."
 envsubst < ${PWD}/etc/setup/templates/configs/tyk/confs/authMiddleware.js > ${PWD}/lib/authz/tyk/data/authMiddleware.js
 
+echo "Working on remsMiddleware.js .."
+envsubst < ${PWD}/etc/setup/templates/configs/tyk/confs/remsMiddleware.js > ${PWD}/lib/authz/tyk/data/remsMiddleware.js
+
 ## TODO: tyk_analytics.conf , key_request.json.tpl
 
 
