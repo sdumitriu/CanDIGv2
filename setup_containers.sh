@@ -14,6 +14,18 @@ conda activate candig
 export PATH="$PWD/bin:$PATH"
 eval $(docker-machine env manager)
 
+if [ -f $PWD/tmp/ssl/selfsigned-site.key ]
+then
+  echo "  ssl certificate exists already"
+else
+  echo "  started make ssl-cert" | tee -a $LOGFILE
+  make ssl-cert
+  if [ $? -ne 0 ]; then
+    echo "ERROR! make ssl-cert failed" | tee -a $LOGFILE
+    exit 1
+  fi
+fi
+
 echo "  started make init-docker" | tee -a $LOGFILE
 make init-docker
 if [ $? -ne 0 ]; then
@@ -32,6 +44,13 @@ echo "  started make compose" | tee -a $LOGFILE
 make compose
 if [ $? -ne 0 ]; then
   echo "ERROR! make compose failed" | tee -a $LOGFILE
+  exit 1
+fi
+
+echo "  started make init-authx " | tee -a $LOGFILE
+make init-authx
+if [ $? -ne 0 ]; then
+  echo "ERROR! make init-authx failed" | tee -a $LOGFILE
   exit 1
 fi
 
